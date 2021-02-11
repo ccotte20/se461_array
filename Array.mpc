@@ -1,0 +1,19 @@
+project (Array) {
+	exename = a1
+	install = .
+	
+	Source_Files {
+		driver.cpp
+		Array.cpp
+	}
+	
+	Header_Files {
+		Array.h
+	}
+	
+	Inline_Files {
+		Array.inl
+	}
+}
+
+// to use thomas% mwc.pl -type make
