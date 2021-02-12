@@ -1,4 +1,12 @@
+// Honor Pledge:
+// I pledge that I have neither given nor 
+// received any help on this assignment.
+// Clark Otte
+
 #include "Array.h"
+
+#include <stdexcept>
+#include <iostream>
 
 #define DEFAULT_SIZE 10
 
@@ -38,49 +46,49 @@ const Array & Array::operator = (const Array & rhs)
 
 char & Array::operator [] (size_t index)
 {
-	try
+	if(index > this->cur_size_)
+	{
+		throw std::out_of_range;
+	}
+	else
 	{
 		return this->data_[index];
-	}
-	catch(std::out_of_range)
-	{
-		throw std::out_of_range();
 	}
 }
 
 const char & Array::operator [] (size_t index) const
 {
-	try
+	if(index > this->cur_size_)
+	{
+		throw std::out_of_range;
+	}
+	else
 	{
 		return this->data_[index];
-	}
-	catch(std::out_of_range)
-	{
-		throw std::out_of_range();
 	}
 }
 
 char Array::get (size_t index) const
 {
-	try
+	if(index > this->cur_size_)
+	{
+		throw std::out_of_range;
+	}
+	else
 	{
 		return this->data_[index];
-	}
-	catch(std::out_of_range)
-	{
-		throw std::out_of_range();
 	}
 }
 
 void Array::set (size_t index, char value)
 {
-	try
+	if(index > this->cur_size_)
 	{
-		this->data_(index)=value;
+		throw std::out_of_range;
 	}
-	catch(std::out_of_range)
+	else
 	{
-		throw std::out_of_range();
+		this->data_[index]=value;
 	}
 }
 
@@ -121,22 +129,72 @@ void Array::resize (size_t new_size)
 
 int Array::find (char ch) const
 {
-
+	for(int i=0; i<this->cur_size_; i++)
+	{
+		if(this->data_[i]==ch)
+		{
+			return i;
+		}
+	}
+	return -1;
 }
 
 int Array::find (char ch, size_t start) const
 {
-
+	if(start > this->cur_size_)
+	{
+		throw std::out_of_range;
+	}
+	else
+	{
+		int i = static_cast<int>(start);
+		for(i; i<this->cur_size_; i++)
+		{
+			if(this->data_[i]==ch)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
 }
 
 bool Array::operator == (const Array & rhs) const
 {
-
+	if(this->cur_size_!=rhs->size())
+	{
+		return false;
+	}
+	else
+	{
+		for(int i=0; i<this->cur_size_; i++)
+		{
+			if(this->data_[i]!=rhs[i])
+			{
+				return false;
+			}
+		}
+		return true;
+	)
 }
 
 bool Array::operator != (const Array & rhs) const
 {
-
+	if(this->cur_size_!=rhs->size())
+	{
+		return true;
+	}
+	else
+	{
+		for(int i=0; i<this->cur_size_; i++)
+		{
+			if(this->data_[i]!=rhs[i])
+			{
+				return true;
+			}
+		}
+		return false;
+	)
 }
 
 void Array::fill (char ch)

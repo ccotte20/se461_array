@@ -1,3 +1,8 @@
+// Honor Pledge:
+// I pledge that I have neither given nor 
+// received any help on this assignment.
+// Clark Otte
+
 #ifndef _ARRAY_H_
 #define _ARRAY_H_
 

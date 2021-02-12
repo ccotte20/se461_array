@@ -1,6 +1,5 @@
 project (Array) {
 	exename = a1
-	install = .
 	
 	Source_Files {
 		driver.cpp
@@ -16,4 +15,4 @@ project (Array) {
 	}
 }
 
-// to use thomas% mwc.pl -type make
+// to use 'thomas% mwc.pl -type make' then 'thomas% make' then 'a1'
