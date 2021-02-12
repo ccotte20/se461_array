@@ -22,12 +22,19 @@ Array::Array (size_t length) : data_(new char[length]), cur_size_(length), max_s
 
 Array::Array (size_t length, char fill) : data_(new char[length]), cur_size_(length), max_size_(length)
 {
-	this->fill[fill];
+	for(int i=0; i<this->cur_size_; i++)
+	{
+		this->data_[i]=fill;
+	}
 }
 
-Array::Array (const Array & arr) : data_(new char[arr->size()]), cur_size_(arr->size()), max_size_(arr->max_size())
+Array::Array (const Array & arr) : data_(new char[arr.size()]), cur_size_(arr.size()), max_size_(arr.max_size())
 {
-	this=arr;
+	this->resize(arr.size());
+	for(int i=0; i<this->cur_size_; i++)
+	{
+		this->data_[i]=arr[i];
+	}
 }
 
 Array::~Array (void)
@@ -37,7 +44,7 @@ Array::~Array (void)
 
 const Array & Array::operator = (const Array & rhs)
 {
-	this->resize(rhs->size());
+	this->resize(rhs.size());
 	for(int i=0; i<this->cur_size_; i++)
 	{
 		this->data_[i]=rhs[i];
@@ -48,7 +55,7 @@ char & Array::operator [] (size_t index)
 {
 	if(index > this->cur_size_)
 	{
-		throw std::out_of_range;
+		throw std::out_of_range("Out of Range");
 	}
 	else
 	{
@@ -60,7 +67,7 @@ const char & Array::operator [] (size_t index) const
 {
 	if(index > this->cur_size_)
 	{
-		throw std::out_of_range;
+		throw std::out_of_range("Out of Range");
 	}
 	else
 	{
@@ -72,7 +79,7 @@ char Array::get (size_t index) const
 {
 	if(index > this->cur_size_)
 	{
-		throw std::out_of_range;
+		throw std::out_of_range("Out of Range");
 	}
 	else
 	{
@@ -84,7 +91,7 @@ void Array::set (size_t index, char value)
 {
 	if(index > this->cur_size_)
 	{
-		throw std::out_of_range;
+		throw std::out_of_range("Out of Range");
 	}
 	else
 	{
@@ -143,7 +150,7 @@ int Array::find (char ch, size_t start) const
 {
 	if(start > this->cur_size_)
 	{
-		throw std::out_of_range;
+		throw std::out_of_range("Out of Range");
 	}
 	else
 	{
@@ -161,7 +168,7 @@ int Array::find (char ch, size_t start) const
 
 bool Array::operator == (const Array & rhs) const
 {
-	if(this->cur_size_!=rhs->size())
+	if(this->cur_size_!=rhs.size())
 	{
 		return false;
 	}
@@ -175,12 +182,12 @@ bool Array::operator == (const Array & rhs) const
 			}
 		}
 		return true;
-	)
+	}
 }
 
 bool Array::operator != (const Array & rhs) const
 {
-	if(this->cur_size_!=rhs->size())
+	if(this->cur_size_!=rhs.size())
 	{
 		return true;
 	}
@@ -194,7 +201,7 @@ bool Array::operator != (const Array & rhs) const
 			}
 		}
 		return false;
-	)
+	}
 }
 
 void Array::fill (char ch)
