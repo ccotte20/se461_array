@@ -5,6 +5,8 @@
 
 #include "Array.h"
 
+// Dr. Ryan: We want to place these in the Header file to avoid multiple inclusion.
+//			 The Header Guard will protect it - here it is has no protection.
 #include <stdexcept>
 #include <iostream>
 
@@ -15,6 +17,8 @@ Array::Array (void) : data_(new char[DEFAULT_SIZE]), cur_size_(DEFAULT_SIZE), ma
 	
 }
 
+// Dr. Ryan: We need to check to make sure that the user has not specified an Array of size 0 here - thus
+//			 we will have to use the Constructors body in this instance.
 Array::Array (size_t length) : data_(new char[length]), cur_size_(length), max_size_(length)
 {
 
@@ -22,6 +26,8 @@ Array::Array (size_t length) : data_(new char[length]), cur_size_(length), max_s
 
 Array::Array (size_t length, char fill) : data_(new char[length]), cur_size_(length), max_size_(length)
 {
+	// Dr. Ryan: Why not use the Fill Method we have in this class to do this work for us - avoid code
+	//			 duplication.
 	for(int i=0; i<this->cur_size_; i++)
 	{
 		this->data_[i]=fill;
@@ -30,6 +36,7 @@ Array::Array (size_t length, char fill) : data_(new char[length]), cur_size_(len
 
 Array::Array (const Array & arr) : data_(new char[arr.size()]), cur_size_(arr.size()), max_size_(arr.max_size())
 {
+	// Dr. Ryan: Will it ALWAYS need to be resized - otherwise we are doing unnecessary work.
 	this->resize(arr.size());
 	for(int i=0; i<this->cur_size_; i++)
 	{
@@ -44,6 +51,9 @@ Array::~Array (void)
 
 const Array & Array::operator = (const Array & rhs)
 {
+	// Dr. Ryan: Always check for self assignment first.
+	
+	// Dr. Ryan: Will it ALWAYS need to be resized - otherwise we are noing unnecessary work.
 	this->resize(rhs.size());
 	for(int i=0; i<this->cur_size_; i++)
 	{
@@ -136,6 +146,8 @@ void Array::resize (size_t new_size)
 
 int Array::find (char ch) const
 {
+	// Dr. Ryan: Why not just use the method below here and just pass '0' as the starting point?
+	//			 That way we can reuse code - work smarter not harder!
 	for(int i=0; i<this->cur_size_; i++)
 	{
 		if(this->data_[i]==ch)
@@ -168,6 +180,8 @@ int Array::find (char ch, size_t start) const
 
 bool Array::operator == (const Array & rhs) const
 {
+	// Dr. Ryan: Always check for self-comparison first.
+	
 	if(this->cur_size_!=rhs.size())
 	{
 		return false;
@@ -187,6 +201,8 @@ bool Array::operator == (const Array & rhs) const
 
 bool Array::operator != (const Array & rhs) const
 {
+	// Dr. Ryan: Why don't we just call the above method and negate the result here?
+	
 	if(this->cur_size_!=rhs.size())
 	{
 		return true;

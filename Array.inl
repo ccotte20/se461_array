@@ -1,3 +1,5 @@
+// Dr. Ryan: Don't forget the Honor Pledge & Digital Signature
+
 inline
 size_t Array::size (void) const
 {
