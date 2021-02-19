@@ -7,6 +7,8 @@
 #define _ARRAY_H_
 
 #include <cstring>          // for size_t definition
+#include <stdexcept>
+#include <iostream>
 
 /**
  * @class Array
